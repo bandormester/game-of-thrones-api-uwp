@@ -1,0 +1,167 @@
+﻿<Page
+    x:Class="gameofthrones.Views.HouseDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:gameofthrones.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:gameofthrones.ViewModels"
+    xmlns:c="using:Template10.Controls"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Page.DataContext>
+            <vm:HouseDetailsPageViewModel x:Name="ViewModel"/>
+        </Page.DataContext>
+    <ScrollViewer>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <c:PageHeader Grid.Row="0" Content="{Binding House.url}" />
+            <StackPanel Grid.Row="1" Margin="0" Orientation="Vertical"  HorizontalAlignment="Left">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Margin" Value="5,2"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Text="{Binding House.name}" Margin="10,0" FontSize="30"/>
+                <Rectangle Width="300" Fill="Black" Height="1" HorizontalAlignment="Left"/>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.region}">
+                    <TextBlock Text="Region:"/>
+                    <TextBlock Text="{Binding House.region}" Foreground="Gray"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.words}">
+                    <TextBlock Text="Words:"/>
+                    <TextBlock Text="{Binding House.words}" Foreground="Gray"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.coatOfArms}">
+                <TextBlock Text="Coat of arms:"/>
+                    <TextBlock Text="{Binding House.coatOfArms}" Foreground="Gray"/>
+            </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.currentLord}">
+                    <TextBlock Text="Current Lord:"/>
+                    <Button Click="Currentlord_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <TextBlock Text="{Binding Currentlord.name}" Margin="5,2" FontSize="20" />
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.heir}">
+                    <TextBlock Text="Heir:"/>
+                    <Button Click="Heir_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <TextBlock Text="{Binding Heir.name}" Margin="5,2" FontSize="20" />
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.overlord}">
+                    <TextBlock Text="Overlord:"/>
+                    <Button Click="Overlord_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <TextBlock Text="{Binding Overlord.name}" Margin="5,2" FontSize="20" />
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.founded}">
+                    <TextBlock Text="Founded:"/>
+                    <TextBlock Text="{Binding House.founded}" Foreground="Gray"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.founder}">
+                <TextBlock Text="Founder:"/>
+                    <Button Click="Founder_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <TextBlock Text="{Binding Founder.name}" Margin="5,2" FontSize="20" />
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Visibility="{Binding ViewHelper.diedOut}">
+                <TextBlock Text="Died out:"/>
+                    <TextBlock Text="{Binding House.diedOut}" Foreground="Gray"/>
+            </StackPanel>
+
+                <TextBlock Text="Titles" Margin="10,10,0,0" Visibility="{Binding ViewHelper.titles}"/>
+                <Rectangle Width="200" Fill="Black" Height="0.5" HorizontalAlignment="Left" Visibility="{Binding ViewHelper.titles}"/>
+                <GridView ItemsSource="{Binding House.titles}" MaxHeight="300" IsEnabled="False" Visibility="{Binding ViewHelper.titles}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="Auto" Width="Auto">
+                                <TextBlock Padding="10,0" Foreground="Black" Text="{Binding}" FontStyle="Italic" TextAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <TextBlock Text="Seats" Margin="10,10,0,0" Visibility="{Binding ViewHelper.seats}"/>
+                <Rectangle Width="200" Fill="Black" Height="0.5" HorizontalAlignment="Left" Visibility="{Binding ViewHelper.seats}"/>
+                <GridView ItemsSource="{Binding House.seats}" MaxHeight="300" IsEnabled="False" Visibility="{Binding ViewHelper.seats}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="Auto" Width="Auto" >
+                                <TextBlock Padding="20,0" Foreground="Black" Text="{Binding}" FontStyle="Italic" TextAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <TextBlock Text="Ancestral weapons" Margin="10,10,0,0" Visibility="{Binding ViewHelper.ancestralWeapons}"/>
+                <Rectangle Width="200" Fill="Black" Height="0.5" HorizontalAlignment="Left" Visibility="{Binding ViewHelper.ancestralWeapons}"/>
+                <GridView ItemsSource="{Binding House.ancestralWeapons}" MaxHeight="300" IsEnabled="False" Visibility="{Binding ViewHelper.ancestralWeapons}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="Auto" Width="Auto">
+                                <TextBlock Padding="10,0" Foreground="Black" Text="{Binding}" FontStyle="Italic" TextAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <TextBlock Text="Cadet Branches" Margin="10,10,0,0" Visibility="{Binding ViewHelper.cadetBranches}"/>
+                <Rectangle Width="200" Fill="Black" Height="0.5" HorizontalAlignment="Left" Visibility="{Binding ViewHelper.cadetBranches}"/>
+                <GridView ItemsSource="{Binding CadetBranches}" MaxHeight="300" IsItemClickEnabled="True" ItemClick="Cadet_Click" Visibility="{Binding ViewHelper.cadetBranches}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="Auto" Width="Auto">
+                                <TextBlock Padding="20,10" Foreground="Black" Text="{Binding name}" FontStyle="Italic" TextAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <TextBlock Text="Sworn members" Margin="10,10,0,0" Visibility="{Binding ViewHelper.swornMembers}"/>
+                <Rectangle Width="200" Fill="Black" Height="0.5" HorizontalAlignment="Left" Visibility="{Binding ViewHelper.swornMembers}"/>
+                <GridView ItemsSource="{Binding SwornMembers}" MaxHeight="300" IsItemClickEnabled="True" ItemClick="Sworn_Click" Visibility="{Binding ViewHelper.swornMembers}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="Auto" Width="200">
+                                <TextBlock Padding="20,10" Foreground="Black" Text="{Binding name}" FontStyle="Italic" TextAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+            </StackPanel>
+        </Grid>
+        </ScrollViewer>
+</Page>
